@@ -6,7 +6,17 @@ const pool = require('../modules/pool.js');
 
 // GET
 toDoRouter.get('/', (req, res) => {
-  res.send('Get Hello');
+  const queryText = `SELECT * FROM "todo" ORDER BY "id" ASC;`;
+
+  pool
+    .query(queryText)
+    .then((toDoResponse) => {
+      res.send(toDoResponse.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 // POST
