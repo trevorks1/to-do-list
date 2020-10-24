@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/trevorks1/to-do-list#readme",
   "dependencies": {
+    "bootstrap": "^4.5.3",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
     "pg": "^8.4.1"
