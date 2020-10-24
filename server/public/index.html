@@ -2,21 +2,109 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
-    <link rel="stylesheet" href="vendors/bootstrap.min.css" />
-    <link rel="stylesheet" href="views/styles.css" />
+    <title>To-Do-App</title>
 
     <script src="vendors/jquery.min.js"></script>
     <script src="scripts/client.js" type="text/javascript"></script>
-    <title>To-Do-App</title>
+    <link rel="stylesheet" href="vendors/bootstrap.min.css" />
+    <link rel="stylesheet" href="views/styles.css" />
   </head>
-  <header>
-    <h1>What An Awesome To-Do-App</h1>
-  </header>
-  <body></body>
+  <body>
+    <header
+      class="navbar navbar-dark bg-dark mb-4 d-flex justify-content-start"
+    >
+      <!--<img src="images/list.png" class="icon" /> -->
+      <h1>To-Do-App</h1>
+    </header>
+
+    <div class="container-fluid pb-5">
+      <!--
+        .container
+        .row
+        .col
+      -->
+      <div class="row">
+        <section id="addTask" class="col-4">
+          <h2>Add Task</h2>
+          <!--
+            .container
+            .row
+            .col
+          -->
+          <div class="row mb-3">
+            <div class="col-6">
+              <input
+                type="text"
+                id="js-nameIn"
+                class="form-control"
+                value=""
+                placeholder="Name"
+              />
+            </div>
+            <div class="col-6">
+              <input
+                type="text"
+                id="js-taskIn"
+                class="form-control"
+                value=""
+                placeholder="Task"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <input
+                type="text"
+                id="js-task_completion"
+                class="form-control"
+                value=""
+                placeholder="Task Completion"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12">
+              <input
+                type="text"
+                id="js-descriptionIn"
+                class="form-control"
+                value=""
+                placeholder="Task Description"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12">
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                id="js-addButton"
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="col-8">
+          <h2>All Koalas</h2>
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Task</th>
+                <th scope="col">Task Completion</th>
+                <th scope="col">Task Description</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="js-viewTask"></tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>
