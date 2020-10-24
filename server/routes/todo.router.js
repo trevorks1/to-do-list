@@ -21,7 +21,31 @@ toDoRouter.get('/', (req, res) => {
 
 // POST
 toDoRouter.post('/', (req, res) => {
-  res.sendStatus(201);
+  // {
+  //   name: 'testName',
+  //   task: 'testName',
+  //   task_completion: 'testName',
+  //   task_description: 'testName',
+  // }
+  const newTask = req.body;
+  const queryText = `INSERT INTO "todo" ("name", "task", "task_completion", "task_description")
+  VALUES ($1, $2, $3, $4);`;
+  const queryDataList = [
+    newTask.name,
+    newTask.task,
+    newTask.task_completion,
+    newTask.task_description,
+  ];
+
+  pool
+    .query(queryText, queryDataList)
+    .then((toDoResponse) => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 // PUT

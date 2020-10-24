@@ -2,10 +2,10 @@ html,
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgb(245, 235, 234);
+  background-color: rgb(252, 251, 248);
 }
 
 .icon {
   display: inline-block;
-  width: 40px;
+  width: 80px;
 }
