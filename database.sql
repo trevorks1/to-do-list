@@ -1,8 +1,8 @@
 --Create Table
 CREATE TABLE "todo" (
   "id" serial primary key,
-  "name" varchar(80) not null,
-  "task" varchar(30) not null,
+  "name" varchar(80),
+  "task" varchar(30),
   "task_completion" boolean not null,
   "task_description" varchar(250)  
 );

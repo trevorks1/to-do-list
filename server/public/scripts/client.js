@@ -1,17 +1,19 @@
 console.log('js');
 
+// jQuery running and calling on listeners and task updates
 $(document).ready(function () {
   console.log('jQuery');
-  // Establish Click Listeners
-  setupClickListeners();
-  // load existing task on page load
-  getTask();
-}); // end doc ready
 
+  setupClickListeners();
+
+  getTask();
+});
+
+// Listener events with buttons to do their task
 function setupClickListeners() {
   $('#js-addButton').on('click', function () {
     console.log('in addButton on click');
-    // using a test object
+
     let newTask = {
       nameIn: $('#js-nameIn').val(),
       taskIn: $('#js-taskIn').val(),
@@ -19,7 +21,6 @@ function setupClickListeners() {
         $('#js-taskCompletionIn').val().toUpperCase() === 'N' ? false : true,
       descriptionIn: $('#js-descriptionIn').val(),
     };
-    // call saveTask with the new object
     saveTask(newTask);
   });
 
@@ -99,6 +100,7 @@ function updateTaskToComplete(taskId) {
     });
 }
 
+// calling to server to delete user input in database
 function deleteTask(id) {
   console.log('DELETE: ', id);
   $.ajax({
@@ -118,6 +120,7 @@ function deleteTask(id) {
 // DOM INTERACTION
 // ------------------------------
 
+// Clearing form fields on user input
 function clearFormFields() {
   $('#js-nameIn').val('');
   $('#js-taskIn').val('');
@@ -125,6 +128,7 @@ function clearFormFields() {
   $('#js-descriptionIn').val('');
 }
 
+// Rendering the data on the client side in a table
 function render(listOfTask) {
   console.log(listOfTask);
   $('#js-viewTask').empty();
