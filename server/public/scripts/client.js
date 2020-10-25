@@ -138,7 +138,7 @@ function render(listOfTask) {
     let taskCompletionBtn = '';
 
     // check complete status for button
-    if (task.taskCompletionIn === false) {
+    if (task.task_completion === false) {
       taskCompletionBtn = `<button class="js-btn-ready btn btn-success btn-sm" data-id="${task.id}">
         Task Is Complete
       </button>`;
@@ -163,6 +163,7 @@ function render(listOfTask) {
           >
             Delete
           </button>
+          ${taskCompletionBtn}
         </td>
       </tr>
     `);
