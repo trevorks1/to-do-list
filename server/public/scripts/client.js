@@ -1,17 +1,19 @@
 console.log('js');
 
+// jQuery running and calling on listeners and task updates
 $(document).ready(function () {
   console.log('jQuery');
-  // Establish Click Listeners
-  setupClickListeners();
-  // load existing task on page load
-  getTask();
-}); // end doc ready
 
+  setupClickListeners();
+
+  getTask();
+});
+
+// Listener events with buttons to do their task
 function setupClickListeners() {
   $('#js-addButton').on('click', function () {
     console.log('in addButton on click');
-    // using a test object
+
     let newTask = {
       nameIn: $('#js-nameIn').val(),
       taskIn: $('#js-taskIn').val(),
@@ -19,29 +21,30 @@ function setupClickListeners() {
         $('#js-taskCompletionIn').val().toUpperCase() === 'N' ? false : true,
       descriptionIn: $('#js-descriptionIn').val(),
     };
-    // call saveTask with the new object
+
     saveTask(newTask);
   });
 
   // event listener for ready
-  $('#js-viewTask').on('click', '.js-btn-ready', handleClickReady);
+  $('#js-taskCompletionIn').on('click', '.js-btn-ready', handleClickReady);
   // event listener for delete
   $('#js-viewTask').on('click', '.js-btn-delete', handleClickDelete);
 }
 
+// handle delete with data and id
 function handleClickDelete() {
   const taskId = $(this).data('id');
-
+  // call to deleteTask function
   deleteTask(taskId);
 }
 
+// handling click to update the task_completion
 function handleClickReady() {
   const id = $(this).data('id');
-
-  updateTaskReadyTransfer(id);
+  // call to updateTaskReadyComplete function
+  updateTaskReadyComplete(id);
 }
 
-//
 // API / SERVER CALLS
 // ------------------------------
 
@@ -63,6 +66,7 @@ function getTask() {
     }); // failure from server
 } // end getTask
 
+// Using ajax to save data
 function saveTask(newTask) {
   console.log('in saveTask', newTask);
   // ajax call to server to get task
@@ -82,7 +86,8 @@ function saveTask(newTask) {
     });
 }
 
-function updateTaskReadyTransfer(taskId) {
+// completing handshake for database, client side updates
+function updateTaskReadyComplete(taskId) {
   console.log(`UPDATE Task ${taskId} - to ready`);
   // AJAX PUT
   $.ajax({
@@ -99,6 +104,7 @@ function updateTaskReadyTransfer(taskId) {
     });
 }
 
+// calling to server to delete user input in database
 function deleteTask(id) {
   console.log('DELETE: ', id);
   $.ajax({
@@ -118,6 +124,7 @@ function deleteTask(id) {
 // DOM INTERACTION
 // ------------------------------
 
+// Clearing form fields on user input
 function clearFormFields() {
   $('#js-nameIn').val('');
   $('#js-taskIn').val('');
@@ -125,6 +132,7 @@ function clearFormFields() {
   $('#js-descriptionIn').val('');
 }
 
+// Rendering the data on the client side in a table
 function render(listOfTask) {
   console.log(listOfTask);
   $('#js-viewTask').empty();
@@ -135,7 +143,7 @@ function render(listOfTask) {
 
     // check transfer status for button
     if (task.taskCompletionIn === false) {
-      taskCompletionBtn = `<button class="js-btn-ready btn btn-success btn-sm" data-id="${task.id}">
+      taskCompletionBtn = `<button class="js-btn-ready btn btn-success btn-sm" data-id="${task.task_completion}">
         Task Is Complete
       </button>`;
     }
