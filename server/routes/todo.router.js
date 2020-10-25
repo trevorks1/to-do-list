@@ -31,9 +31,9 @@ toDoRouter.post('/', (req, res) => {
   const queryText = `INSERT INTO "todo" ("name", "task", "task_completion", "task_description")
   VALUES ($1, $2, $3, $4);`;
   const queryDataList = [
-    newTask.name,
-    newTask.task,
-    newTask.taskCompletion,
+    newTask.nameIn,
+    newTask.taskIn,
+    newTask.taskCompletionIn,
     newTask.descriptionIn,
   ];
 
@@ -49,7 +49,35 @@ toDoRouter.post('/', (req, res) => {
 });
 
 // PUT
+toDoRouter.put('/:taskId', (req, res) => {
+  const queryText = `UPDATE "todo" SET "task_completion"=TRUE WHERE "id"=$1;`;
+  const queryData = [req.params.taskId];
+
+  pool
+    .query(queryText, queryData)
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 
 // DELETE
+toDoRouter.delete('/:id', (req, res) => {
+  const queryText = `DELETE FROM "todo" WHERE "id"=$1;`;
+  const queryData = [req.params.id];
+
+  pool
+    .query(queryText, queryData)
+    .then((response) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = toDoRouter;

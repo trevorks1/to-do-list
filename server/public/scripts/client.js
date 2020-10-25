@@ -12,14 +12,14 @@ function setupClickListeners() {
   $('#js-addButton').on('click', function () {
     console.log('in addButton on click');
     // using a test object
-    let taskToSend = {
-      name: $('#js-nameIn').val(),
-      age: $('#js-taskIn').val(),
-      taskCompletion: $('#js-taskCompletionIn').val() === 'N' ? false : true,
-      taskDescription: $('#js-descriptionIn').val(),
+    let newTask = {
+      nameIn: $('#js-nameIn').val(),
+      taskIn: $('#js-taskIn').val(),
+      taskCompletionIn: $('#js-taskCompletionIn').val() === 'N' ? false : true,
+      descriptionIn: $('#js-descriptionIn').val(),
     };
     // call saveTask with the new object
-    saveTask(taskToSend);
+    saveTask(newTask);
   });
 
   // event listener for ready
@@ -89,7 +89,7 @@ function updateTaskReadyTransfer(taskId) {
     // data: {}
   })
     .then((response) => {
-      getKoalas();
+      getTask();
     })
     .catch(function (err) {
       console.log(err);
@@ -104,7 +104,7 @@ function deleteTask(id) {
     url: '/todo/' + id,
   })
     .then((response) => {
-      getKoalas();
+      getTask();
     })
     .catch(function (err) {
       console.log(err);
@@ -119,8 +119,8 @@ function deleteTask(id) {
 function clearFormFields() {
   $('#js-nameIn').val('');
   $('#js-taskIn').val('');
-  $('#js-genderIn').val('');
-  $('#js-readyForTransferIn').val('');
+  $('#js-taskCompletionIn').val('');
+  $('#js-descriptionIn').val('');
 }
 
 function render(listOfTask) {
@@ -134,7 +134,7 @@ function render(listOfTask) {
     // check transfer status for button
     if (task.taskCompletionIn === false) {
       taskCompletionBtn = `<button class="js-btn-ready btn btn-success btn-sm" data-id="${task.id}">
-        Ready for Transfer
+        Task Is Complete
       </button>`;
     }
 
@@ -146,11 +146,12 @@ function render(listOfTask) {
 
     $('#js-viewTask').append(`
       <tr>
-        <td>${task.name}</td>
-        <td>${task.task}</td>
-        <td>${task.taskCompletion}</td>
+        <td>${task.nameIn}</td>
+        <td>${task.taskIn}</td>
+        <td>${task.taskCompletionIn}</td>
         <td>${readyYN}</td>
         <td>${taskCompletionBtn}</td>
+        <td>${task.descriptionIn}
         <td>
           <button
             class="js-btn-delete btn btn-danger"
