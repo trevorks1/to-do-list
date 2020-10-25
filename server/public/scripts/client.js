@@ -15,7 +15,8 @@ function setupClickListeners() {
     let newTask = {
       nameIn: $('#js-nameIn').val(),
       taskIn: $('#js-taskIn').val(),
-      taskCompletionIn: $('#js-taskCompletionIn').val() === 'N' ? false : true,
+      taskCompletionIn:
+        $('#js-taskCompletionIn').val().toUpperCase() === 'N' ? false : true,
       descriptionIn: $('#js-descriptionIn').val(),
     };
     // call saveTask with the new object
@@ -53,6 +54,7 @@ function getTask() {
   })
     .then(function (response) {
       // render to the DOM
+      console.log(response);
       render(response);
     }) // successful response
     .catch(function (err) {
@@ -146,12 +148,10 @@ function render(listOfTask) {
 
     $('#js-viewTask').append(`
       <tr>
-        <td>${task.nameIn}</td>
-        <td>${task.taskIn}</td>
-        <td>${task.taskCompletionIn}</td>
-        <td>${readyYN}</td>
-        <td>${taskCompletionBtn}</td>
-        <td>${task.descriptionIn}
+        <td>${task.name}</td>
+        <td>${task.task}</td>
+        <td>${task.task_completion}</td>
+        <td>${task.task_description}</td>
         <td>
           <button
             class="js-btn-delete btn btn-danger"
