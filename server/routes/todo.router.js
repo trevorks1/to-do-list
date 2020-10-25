@@ -24,7 +24,7 @@ toDoRouter.post('/', (req, res) => {
   // {
   //   name: 'testName',
   //   task: 'testName',
-  //   task_completion: 'testName',
+  //   taskCompletion: 'testName',
   //   task_description: 'testName',
   // }
   const newTask = req.body;
@@ -33,8 +33,8 @@ toDoRouter.post('/', (req, res) => {
   const queryDataList = [
     newTask.name,
     newTask.task,
-    newTask.task_completion,
-    newTask.task_description,
+    newTask.taskCompletion,
+    newTask.descriptionIn,
   ];
 
   pool
