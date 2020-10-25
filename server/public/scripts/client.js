@@ -38,7 +38,7 @@ function handleClickDelete() {
 function handleClickReady() {
   const id = $(this).data('id');
 
-  updateTaskReadyTransfer(id);
+  updateTaskToComplete(id);
 }
 
 //
@@ -82,7 +82,7 @@ function saveTask(newTask) {
     });
 }
 
-function updateTaskReadyTransfer(taskId) {
+function updateTaskToComplete(taskId) {
   console.log(`UPDATE Task ${taskId} - to ready`);
   // AJAX PUT
   $.ajax({
@@ -133,7 +133,7 @@ function render(listOfTask) {
     let readyYN = task.taskCompletionIn;
     let taskCompletionBtn = '';
 
-    // check transfer status for button
+    // check complete status for button
     if (task.taskCompletionIn === false) {
       taskCompletionBtn = `<button class="js-btn-ready btn btn-success btn-sm" data-id="${task.id}">
         Task Is Complete
